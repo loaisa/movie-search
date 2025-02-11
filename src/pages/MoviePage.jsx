@@ -10,7 +10,7 @@ const MoviePage = () => {
     useEffect(() => {
         const fetchMovie = async () => {
             const response = await axios.get(
-                `http://www.omdbapi.com/?i=${id}&apikey=${API_KEY}`
+                `https://www.omdbapi.com/?i=${id}&apikey=${API_KEY}`
             );
             setMovie(response.data);
         };
