@@ -32,7 +32,8 @@ const Home = () => {
             dispatch(setLoading(false));
         }
     };
-    return (<div className="App">
+    return (
+        <div className="App">
         <nav>
             <ul>
                 <Link to="/">Главная</Link>
