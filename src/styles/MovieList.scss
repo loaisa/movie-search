@@ -1,0 +1,52 @@
+@import "App";
+// Стили для страницы с фильмами
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+
+  .movie {
+    background-color: white;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 8px $shadow-color;
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+    transition: transform $transition-duration ease, box-shadow $transition-duration ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px $hover-shadow-color;
+    }
+
+    img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: $text-color;
+    }
+
+    p {
+      font-size: 14px;
+      color: $secondary-text-color;
+      margin-bottom: 10px;
+    }
+
+  }
+}

@@ -1,0 +1,63 @@
+@import 'App';
+// Стили для страницы деталей фильма
+.movie-details {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+
+    &:hover {
+      background-color: darken($secondary-text-color, 10%);
+    }
+  }
+
+  .trailer {
+    margin: 3vh 0;
+
+    iframe {
+      border-radius: 8px;
+    }
+  }
+}
+
+.movie-content {
+  display: flex;
+  gap: 20px;
+
+  img {
+    width: 300px;
+    height: auto;
+    border-radius: $border-radius;
+  }
+
+  .movie-info {
+    flex: 1;
+
+    h1 {
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 16px;
+      color: $text-color;
+      margin: 10px 0;
+      font-family: sans-serif;
+
+      strong {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
