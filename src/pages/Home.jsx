@@ -47,9 +47,9 @@ const Home = () => {
         <SearchBar onSearch={handleSearch}/>
         {loading && <div className="loading-container">
             <div className="loading-spinner"></div>
-            <p className="loading-text">Loading...</p>
+            <p className="loading-text">Загрузка...</p>
         </div>}
-        {error && <p>{error}</p>}
+        {error && <p>Ошибка</p>}
         <MovieList movies={movies} />
     </div>);
 }

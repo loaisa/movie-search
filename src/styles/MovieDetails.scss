@@ -33,6 +33,7 @@
 
 .movie-content {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 
   img {
@@ -40,6 +41,7 @@
     height: auto;
     border-radius: $border-radius;
   }
+
 
   .movie-info {
     flex: 1;

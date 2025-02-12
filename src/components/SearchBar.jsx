@@ -15,7 +15,7 @@ const SearchBar = ({onSearch}) => {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Введите название фильма"
             />
-            <button type="submit">Искать</button>
+            <button type="submit"><p>Искать</p></button>
         </form>
     );
 };

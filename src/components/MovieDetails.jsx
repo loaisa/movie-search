@@ -1,15 +1,12 @@
 import React, {useEffect} from 'react';
-import {useParams, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../styles/MovieDetails.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {addToFavorites, removeFromFavorites, setLoading, setTrailer} from "../redux/moviesSlice";
 
-const MovieDetails = () => {
-    const {id} = useParams(); // Получаем ID фильма из URL
+const MovieDetails = ({movie}) => {
     const navigate = useNavigate(); // Для возврата на главную страницу
-    const [movie, setMovie] = React.useState('');
-    const API_KEY = process.env.REACT_APP_API_KEY
     const API_KEY_YOUTUBE = process.env.REACT_APP_API_KEY_YOUTUBE
 
     const dispatch = useDispatch();
@@ -19,22 +16,20 @@ const MovieDetails = () => {
     const {trailerKey} = useSelector((state) => state.movies);
 
 
-    useEffect(() => {
-        dispatch(setLoading(true));
-        const fetchTrailer = async () => {
-            try {
-                const response = await axios.get(
-                    `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${movie.Title}+trailer&key=${API_KEY_YOUTUBE}`
-                )
-                dispatch(setTrailer(response.data.items[0]?.id.videoId))
-            } catch (error) {
-                return error
-            } finally {
-                dispatch(setLoading(false));
-            }
-        };
-        fetchTrailer()
-    }, [movie.Title, dispatch, API_KEY_YOUTUBE]);
+    // useEffect(() => {
+    //     const fetchTrailer = async () => {
+    //         try {
+    //             const response = await axios.get(
+    //                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${movie.Title}+trailer&key=${API_KEY_YOUTUBE}`
+    //             )
+    //
+    //             dispatch(setTrailer(response.data.items[0]?.id.videoId))
+    //         } catch (error) {
+    //             return error
+    //         }
+    //     };
+    //     fetchTrailer()
+    // }, [movie.Title, API_KEY_YOUTUBE, dispatch, trailerKey]);
 
     const handleFavoriteClick = () => {
         if (isFavorite) {
@@ -43,32 +38,6 @@ const MovieDetails = () => {
             dispatch(addToFavorites(movie)); // Добавить в избранное
         }
     };
-
-
-    React.useEffect(() => {
-        const fetchMovieDetails = async () => {
-            try {
-                const response = await axios.get(
-                    `https://www.omdbapi.com/?i=${id}&apikey=${API_KEY}`
-                );
-                setMovie(response.data);
-            } catch (error) {
-                console.error("Ошибка при загрузке деталей фильма:", error);
-            }
-        };
-
-        fetchMovieDetails();
-    }, [id]);
-
-    if (!movie) {
-        return (
-            <div className="loading-container">
-                <div className="loading-spinner"></div>
-                <p className="loading-text">Загрузка...</p>
-            </div>
-        );
-    }
-
     return (
         <div className="movie-details">
             <button onClick={() => navigate('/')}>

@@ -8,11 +8,12 @@ $hover-shadow-color: rgba(0, 0, 0, 0.2);
 $border-radius: 5px;
 $transition-duration: 0.3s;
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
-a {
+
+a{
   text-decoration: none;
   color: #333333;
 }
@@ -53,9 +54,13 @@ a {
       background-color: $hover-color;
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    button {
+      margin-top: 2vh;
+    }
+  }
 }
-
-
 
 
 .loading-spinner {
@@ -90,7 +95,7 @@ a {
 
 .favorites {
   padding: 20px;
-
+  font-family: sans-serif;
   h2 {
     color: #007bff;
   }
