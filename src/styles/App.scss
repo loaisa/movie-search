@@ -8,26 +8,111 @@ $hover-shadow-color: rgba(0, 0, 0, 0.2);
 $border-radius: 5px;
 $transition-duration: 0.3s;
 
+::-webkit-scrollbar {
+  width: 0;
+}
 * {
   margin: 0;
   padding: 0;
 }
 
-a{
+a {
   text-decoration: none;
-  color: #333333;
+  color: white
 }
 
 .App {
+
+  &__wrapper {
+    padding: 20px;
+  }
+
   text-align: center;
-  padding: 20px;
   font-family: Arial, sans-serif;
   background-color: $background-color;
   min-height: 100vh;
 
+  .header {
+    height: 2.5rem;
+    z-index: 1;
+    top: 0;
+    position: sticky;
+    display: grid;
+    align-items: center;
+    background-color: black;
+
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+
+        a {
+          position: relative;
+          color: white;
+          line-height: 1; /*задаём высоту строки*/
+          text-decoration: none; /*убираем подчёркивание*/
+
+        }
+        a:after {
+          display: block;
+          position: absolute;
+          left: 0; /*изменить на right:0;, чтобы изменить направление подчёркивания */
+          width: 0;/*задаём длинну линии до наведения курсора*/
+          height: 2px; /*задаём ширину линии*/
+          background-color: whitesmoke; /*задаём цвет линии*/
+          content: "";
+          transition: width 0.6s ease-out; /*задаём время анимации*/
+        }
+        a:hover:after,
+        a:focus:after {
+          width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+        }
+
+    }
+  }
+
   h1 {
     color: $text-color;
     margin-bottom: 20px;
+  }
+
+  button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.8rem 1rem;
+    margin: 1rem;
+    cursor: pointer;
+    transition: 0.5s all ease-in-out;
+
+    &.main {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      border-radius: 1rem;
+      position: fixed;
+      bottom: -5rem;
+      right: 1rem;
+      transition: 0.2s all ease-in-out;
+      background-color: black;
+      color: white;
+      border: none;
+
+      &.show {
+        bottom: 0;
+      }
+    }
+
+    &.back {
+      background-color: black;
+      color: white;
+      border: none;
+    }
+
+    &:hover {
+      background: #343434;
+      transform: scale(1.05);
+      transition: 0.2s all ease-in-out;
+    }
   }
 
   input {
@@ -35,24 +120,8 @@ a{
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: $border-radius;
-    margin-right: 10px;
     width: 300px;
     max-width: 100%;
-  }
-
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: $border-radius;
-    cursor: pointer;
-    transition: background-color $transition-duration ease;
-
-    &:hover {
-      background-color: $hover-color;
-    }
   }
 
   @media only screen and (max-width: 600px) {
@@ -67,9 +136,9 @@ a{
   display: inline-block;
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(0, 123, 255, 0.3); // Цвет границы
+  border: 4px solid black; // Цвет границы
   border-radius: 50%;
-  border-top-color: #007bff; // Цвет верхней границы
+  border-top-color: #b4b4b4; // Цвет верхней границы
   animation: spin 1s ease-in-out infinite; // Анимация
 }
 
@@ -82,7 +151,7 @@ a{
 .loading-text {
   margin-top: 10px;
   font-size: 18px;
-  color: #007bff;
+  color: black;
 }
 
 .loading-container {
@@ -96,6 +165,7 @@ a{
 .favorites {
   padding: 20px;
   font-family: sans-serif;
+
   h2 {
     color: #007bff;
   }

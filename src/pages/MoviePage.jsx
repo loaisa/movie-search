@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import axios, {AxiosError} from 'axios';
 import {useParams} from 'react-router-dom';
 import MovieDetails from '../components/MovieDetails';
 import {useDispatch, useSelector} from "react-redux";
-import {addToFavorites, removeFromFavorites, setTrailer} from "../redux/moviesSlice";
+import {setTrailer} from "../redux/moviesSlice";
 
 const MoviePage = () => {
-    const navigate = useNavigate(); // Для возврата на главную страницу
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
     const API_KEY = process.env.REACT_APP_API_KEY; // Замените на ваш API-ключ
@@ -16,6 +14,7 @@ const MoviePage = () => {
 
     useEffect(() => {
         const fetchMovie = async () => {
+            try {
             const response = await axios.get(
                 `https://www.omdbapi.com/?i=${id}&apikey=${API_KEY}`
             );
@@ -24,7 +23,13 @@ const MoviePage = () => {
                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${Title}+trailer&key=${API_KEY_YOUTUBE}`
             )
             dispatch(setTrailer(responseYoutube.data.items[0]?.id.videoId))
-            setMovie(response.data);
+            setMovie(response.data);}
+            catch (e){
+                if (e instanceof AxiosError) {
+                    alert('Ошибка при запросе')
+                }
+            }
+
         };
         fetchMovie();
     }, [id]);

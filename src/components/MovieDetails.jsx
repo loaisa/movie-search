@@ -1,36 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+
 import "../styles/MovieDetails.scss";
+
 import {useDispatch, useSelector} from "react-redux";
 import {addToFavorites, removeFromFavorites, setLoading, setTrailer} from "../redux/moviesSlice";
 
 const MovieDetails = ({movie}) => {
     const navigate = useNavigate(); // Для возврата на главную страницу
-    const API_KEY_YOUTUBE = process.env.REACT_APP_API_KEY_YOUTUBE
 
     const dispatch = useDispatch();
     const favorites = useSelector((state) => state.movies.favorites);
     const isFavorite = favorites.some((fav) => fav.imdbID === movie.imdbID);
 
     const {trailerKey} = useSelector((state) => state.movies);
-
-
-    // useEffect(() => {
-    //     const fetchTrailer = async () => {
-    //         try {
-    //             const response = await axios.get(
-    //                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${movie.Title}+trailer&key=${API_KEY_YOUTUBE}`
-    //             )
-    //
-    //             dispatch(setTrailer(response.data.items[0]?.id.videoId))
-    //         } catch (error) {
-    //             return error
-    //         }
-    //     };
-    //     fetchTrailer()
-    // }, [movie.Title, API_KEY_YOUTUBE, dispatch, trailerKey]);
-
     const handleFavoriteClick = () => {
         if (isFavorite) {
             dispatch(removeFromFavorites(movie.imdbID)); // Удалить из избранного
@@ -39,8 +22,9 @@ const MovieDetails = ({movie}) => {
         }
     };
     return (
+
         <div className="movie-details">
-            <button onClick={() => navigate('/')}>
+            <button className='back' onClick={() => navigate('/')}>
                 Назад
             </button>
             <div className="movie-content">
@@ -63,7 +47,7 @@ const MovieDetails = ({movie}) => {
                         height="300"
                         src={`https://www.youtube.com/embed/${trailerKey}`}
                         title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;geolocation;"
+
                         allowFullScreen
                     ></iframe>
 
