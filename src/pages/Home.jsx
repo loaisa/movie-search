@@ -24,7 +24,7 @@ const Home = () => {
     };
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
     const handleSearch = async (query) => {
@@ -63,7 +63,7 @@ const Home = () => {
                     <div className="loading-spinner"></div>
                     <p className="loading-text">Загрузка...</p>
                 </div>}
-                {error && <p>Ошибка</p>}
+                {error && <p>Ошибка! Попробуй ввести наименование на английском языке :)</p>}
                 <MovieList movies={movies}/>
             </div>
 
