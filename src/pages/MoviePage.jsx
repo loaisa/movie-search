@@ -25,21 +25,23 @@ const MoviePage = () => {
             dispatch(setTrailer(responseYoutube.data.items[0]?.id.videoId))
             setMovie(response.data);}
             catch (e){
-                if (e instanceof AxiosError) {
-                    alert('Ошибка при запросе')
-                }
+                console.log(e)
             }
 
         };
         fetchMovie();
     }, [id]);
-
+    //
     if (!movie) {
         return (
-            <div className="loading-container">
-                <div className="loading-spinner"></div>
-                <p className="loading-text">Загрузка...</p>
-            </div>
+ 
+                <div className="overlay">
+                    <div className="loading-container">
+                        <div className="loading-spinner"></div>
+                        <p className="loading-text">Загрузка...</p>
+                    </div>
+                </div>
+        
         );
     }
 

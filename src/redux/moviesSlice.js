@@ -19,6 +19,7 @@ const moviesSlice = createSlice({
             state.list = action.payload;
         },
         setLoading: (state, action) => {
+    
             state.loading = action.payload;
         },
         setError: (state, action) => {

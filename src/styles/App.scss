@@ -20,11 +20,16 @@ a {
   text-decoration: none;
   color: white
 }
-
+h3{
+  color:black;
+  margin: 10px
+}
 .App {
 
   &__wrapper {
     padding: 20px;
+    position: relative;
+    min-height: 100vh;
   }
 
   text-align: center;
@@ -76,6 +81,7 @@ a {
   }
 
   button {
+    z-index: 1000;
     background-color: black;
     color: white;
     border: none;
@@ -90,8 +96,8 @@ a {
       margin: 1rem;
       border-radius: 1rem;
       position: fixed;
-      bottom: -5rem;
-      right: 1rem;
+      bottom: 20px;
+      right: 20px;
       transition: 0.2s all ease-in-out;
       background-color: black;
       color: white;
@@ -131,27 +137,17 @@ a {
   }
 }
 
-
-.loading-spinner {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 4px solid black; // Цвет границы
-  border-radius: 50%;
-  border-top-color: #b4b4b4; // Цвет верхней границы
-  animation: spin 1s ease-in-out infinite; // Анимация
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg); // Вращение на 360 градусов
-  }
-}
-
-.loading-text {
-  margin-top: 10px;
-  font-size: 18px;
-  color: black;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .loading-container {
@@ -159,7 +155,30 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 200px; // Высота контейнера
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 15px;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .favorites {
